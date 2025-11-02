@@ -1,13 +1,26 @@
+import React, { useState } from "react";
+import LoginForm from "./LoginForm";
 
-import React from "react";
-import './../styles/App.css';
+export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-const App = () => {
+  const handleLogin = () => setIsLoggedIn(true);
+  const handleLogout = () => setIsLoggedIn(false);
+
   return (
-    <div>
-        {/* Do not remove the main div */}
-    </div>
-  )
-}
+    <div style={{ maxWidth: 420, margin: "40px auto", fontFamily: "sans-serif" }}>
+      {/* exact header expected by the tests */}
+      <h1>Parent Component</h1>
 
-export default App
+      {/* pass state and callbacks to child */}
+      <LoginForm isLoggedIn={isLoggedIn} onLogin={handleLogin} onLogout={handleLogout} />
+
+      <hr />
+
+      <div>
+        <strong>Parent view:</strong>
+        <p>{isLoggedIn ? "Parent: user is logged in" : "Parent: user is NOT logged in"}</p>
+      </div>
+    </div>
+  );
+}
